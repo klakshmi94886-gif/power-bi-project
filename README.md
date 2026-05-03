@@ -34,11 +34,11 @@ By achieving these objectives, the project transforms raw administrative data in
 
 ---
 
-## 3. Statement of the Problem ⚠️
+## 3. Statement of the Problem 
 
 Statewide accountability data is often released in massive, complex datasets that are difficult for educators, administrators, and stakeholders to interpret in their raw form. Without proper data cleaning and transformation, several key issues arise:
 
-### Key Issues ⚠️
+### Key Issues 
 
 1. **Data Complexity & Noise** - Raw datasets contain thousands of rows with inconsistent formatting, missing values (e.g., "Not Rated" or "."), and redundant information that obscures actual performance trends.
 
@@ -122,7 +122,7 @@ These attributes represent the core ratings and scores assigned by the Texas Edu
 
 Excel served as the primary engine for data engineering and initial analytics. The following workflows were implemented to transform the raw TEA (Texas Education Agency) data into a structured format.
 
-### 6.1 Data Cleaning 🧹
+### 6.Data Cleaning 🧹
 
 The first phase involved auditing the raw dataset to ensure integrity and consistency.
 
@@ -132,7 +132,7 @@ The first phase involved auditing the raw dataset to ensure integrity and consis
 
 - **Standardizing Formats** - Converted columns to appropriate data types—ensuring student counts are integers, scores are decimals/numbers, and regional codes maintain leading zeros where necessary.
 
-### 6.2 Data Transformation 🔄
+### 7. Data Transformation 🔄
 
 Advanced features were used to create new intelligence from existing attributes.
 
@@ -142,7 +142,7 @@ Advanced features were used to create new intelligence from existing attributes.
   - Poverty Status: "High Poverty" or "Low Poverty"
   - Performance Level: "High Performing" or "Needs Improvement"
 
-### 6.3 Data Analysis & Visualization 📈
+### 8. Data Analysis & Visualization 📈
 
 - **Pivot Tables** - Generated multi-dimensional summaries to aggregate performance scores by Region City and Poverty Status, allowing comparison of average scores across different geographic areas.
 
@@ -152,19 +152,19 @@ Advanced features were used to create new intelligence from existing attributes.
 
 ---
 
-## 7. Data Model Architecture 🧱
+## 9. Data Model Architecture 🧱
 
 For the accountability project, the model follows a **Star Schema** approach, where the cleaned accountability data acts as the primary table, supported by lookups for regions and counties.
 
 A robust data model ensures that when you filter by a "Region City," all related charts update instantly and accurately.
 
-### 7.1 Relationship Management 🔗
+### 1. Relationship Management 🔗
 
 - **One-to-Many (1:\*)** - A relationship where a single record in a lookup table (like a list of all 20 Regions) relates to many records in the fact table (the hundreds of school districts in those regions).
 
 - **Directionality** - Relationships are set to "Single" direction to ensure data flows from your filters (Slicers) down to your results.
 
-### 7.2 Fact and Dimension Tables 🗂️
+### 2. Fact and Dimension Tables 🗂️
 
 - **Fact Table** - "Fact Accountability Data" containing all the performance scores, ratings, and student counts.
 
@@ -172,26 +172,26 @@ A robust data model ensures that when you filter by a "Region City," all related
 
 ---
 
-## 8. DAX (Data Analysis Expressions) 🧠
+## 10. DAX (Data Analysis Expressions) 🧠
 
 DAX is the formula language used in Power BI to create custom calculations. Unlike standard Excel formulas, DAX is designed to work over entire tables and respond to report filters.
 
 For this project, the following DAX measures were implemented to drive the dashboard:
 
-### 8.1 Basic Aggregations ➕
+### 1. Basic Aggregations ➕
 
 These measures provide the "Big Numbers" (Cards) at the top of your dashboard.
 
 - **Total Students** - Sum of all students across selected districts
 - **Average Overall Score** - Mean performance score providing a benchmark for comparison
 
-### 8.2 Calculated Measures (Logic-Based) 🧠
+### 2. Calculated Measures (Logic-Based) 🧠
 
 These measures allow for dynamic counting of schools based on their performance.
 
 - **High Performing Count** - Number of districts achieving A/B ratings
 
-### 8.3 Advanced Context DAX 🔍
+### 3. Advanced Context DAX 🔍
 
 Useful for comparing a specific district's performance against the state average.
 
@@ -199,11 +199,11 @@ Useful for comparing a specific district's performance against the state average
 
 ---
 
-## 9. Dashboard Overview 📊
+## 10. Dashboard Overview 📊
 
 The dashboard is designed with a hierarchical flow: starting with high-level Key Performance Indicators (KPIs) at the top, followed by Geographic and Categorical distributions, and concluding with Correlation Analysis to explore the "why" behind the numbers.
 
-### 9.1 Key Performance Indicators (KPI Cards) 🧾
+### 1. Key Performance Indicators (KPI Cards) 🧾
 
 The top of the report features dynamic cards that provide an immediate summary of the state's educational landscape. These numbers update automatically as users apply filters.
 
@@ -211,21 +211,21 @@ The top of the report features dynamic cards that provide an immediate summary o
 - **Average Overall Score** - The mean performance score, providing a benchmark for comparison
 - **% High Performing** - The percentage of districts that achieved an 'A' or 'B' rating
 
-### 9.2 Geographic Distribution (Map Visual) 🗺️
+### 2. Geographic Distribution (Map Visual) 🗺️
 
 Using the County and Region City attributes, a map visualizes performance across Texas.
 
 - **Logic** - Bubbles are sized by Number of Students and colored by Overall Rating
 - **Insight** - Identifies if certain regions (e.g., urban vs. rural) are disproportionately struggling or succeeding
 
-### 9.3 Performance Segmentation (Bar & Donut Charts) 📊
+### 3. Performance Segmentation (Bar & Donut Charts) 📊
 
 To understand the "grade" distribution, categorical charts are used:
 
 - **Rating Distribution (Donut Chart)** - Shows the percentage of districts falling into each grade category (A, B, C, D, F)
 - **Regional Comparison (Clustered Bar Chart)** - Compares the Average Overall Score across different Education Service Centers (ESCs), highlighting which regional offices are seeing the best student outcomes
 
-### 9.4 Correlation Analysis (Scatter Plot) 📉
+### 4. Correlation Analysis (Scatter Plot) 📉
 
 One of the most critical views in the report is the relationship between socioeconomic factors and academic results.
 
@@ -234,7 +234,7 @@ One of the most critical views in the report is the relationship between socioec
 - **Trend Line** - A linear regression line is added to visualize the correlation
 - **Insight** - Typically reveals the "Achievement Gap," showing how higher poverty levels often correlate with lower accountability scores, prompting discussions on resource allocation
 
-### 9.5 Regional Performance Comparison (Column Chart) 🌍
+### 5. Regional Performance Comparison (Column Chart) 🌍
 
 The column chart compares Average Overall Scores across different administrative entities.
 
@@ -242,14 +242,14 @@ The column chart compares Average Overall Scores across different administrative
 - **Values** - The mean Overall Score, providing a benchmark for regional health
 - **Insight** - Highlights which regional offices are seeing the best student outcomes and which are facing more significant challenges
 
-### 9.6 Interactive Features (Slicers & Cross-Filtering) 🧩
+### 6. Interactive Features (Slicers & Cross-Filtering) 🧩
 
 The true power of the analysis lies in its interactivity:
 
 - **Slicers** - Users can filter the entire report by Region, School Type (District vs. Campus), or Poverty Status (High vs. Low)
 - **Cross-Highlighting** - Clicking on the "F" segment in the Donut Chart instantly filters the map and scatter plot to show only those failing districts, allowing for rapid root-cause analysis
 
-### 9.7 Summary of Insights Derived 📝
+### 11. Summary of Insights Derived 📝
 
 - **Equity Gaps** - Data clearly visualizes the impact of economic status on performance levels
 - **Regional Excellence** - Identification of specific regions that are "beating the odds" (High Poverty but High Performing)
@@ -257,19 +257,19 @@ The true power of the analysis lies in its interactivity:
 
 ---
 
-## 10. Descriptive Analysis 🔍
+## 12. Descriptive Analysis 🔍
 
 The Descriptive Analysis and Insights & Conclusions sections provide a data-driven summary of the 2022-2023 Texas accountability landscape, highlighting performance trends and the impact of socioeconomic factors.
 
 The descriptive analysis provides a snapshot of the dataset's central tendencies and distributions. For the 1,208 school districts analyzed, the following metrics were observed:
 
-### 10.1 Key Summary Statistics 📌
+### * Key Summary Statistics 📌
 
 - **Average Overall Score** - The statewide mean score is 78.03, indicating a "C" to "B" average performance across Texas
 - **Enrollment Scale** - Student populations vary significantly, ranging from small rural districts (8 students) to massive urban centers (nearly 190,000 students), with a mean enrollment of 4,556
 - **Economic Landscape** - On average, 61.6% of students are classified as economically disadvantaged, highlighting the broad necessity for poverty-aligned educational support
 
-### 10.2 Rating Distribution 📊
+### * Rating Distribution 📊
 
 The state's accountability grades follow a bell-curve distribution centered on a "B" rating:
 
@@ -283,71 +283,71 @@ The state's accountability grades follow a bell-curve distribution centered on a
 
 ## 11. Insights & Conclusions 💡
 
-### 11.1 The Poverty-Performance Correlation 📈
+### 1. The Poverty-Performance Correlation 📈
 
 There is a statistically significant gap in performance based on economic status. The Low Poverty districts (≤60% disadvantaged) maintain an average score of 82.8, while High Poverty districts (>60% disadvantaged) average 74.5. This 8.3-point disparity confirms that socioeconomic challenges continue to be a primary predictor of academic scores.
 
-### 11.2 Identifying "Resilient" Districts 🌟
+### 2. Identifying "Resilient" Districts 🌟
 
 A critical insight from the data is the presence of "Resilient" districts. Despite the overall trend, 36.2% of High Poverty districts managed to achieve a High Performing (A or B) rating. These districts serve as vital benchmarks for success, proving that effective leadership and instructional strategies can overcome economic barriers.
 
-### 11.3 Regional Performance Disparities 🌍
+### 3. Regional Performance Disparities 🌍
 
 Geographic location plays a role in district outcomes. Regions centered in Wichita Falls (Avg: 83.2) and Lubbock (Avg: 82.0) lead the state in average accountability scores. Conversely, large metropolitan regions like San Antonio (Avg: 72.4) and Austin (Avg: 74.2) face more significant challenges in lifting aggregate performance levels.
 
-### 11.4 Impact of the EB/EL Population 🗣️
+### 4. Impact of the EB/EL Population 🗣️
 
 Districts with high percentages of Emergent Bilingual (EB) students often show lower "Student Achievement" scores but higher "School Progress" scores. This suggests that while these students may start further behind, the districts are successfully demonstrating high levels of individual student growth over time.
 
-### 11.5 Summary 🧾
+### ** Summary 🧾
 
 The analysis reveals that while the Texas education system is generally healthy (with over 50% of districts earning an A or B), there remains a systemic achievement gap linked to poverty. Future resource allocation and policy interventions should focus on the 36.2% of resilient high-poverty districts to replicate their models in lower-performing areas. The use of Power BI and Excel in this project has successfully converted stagnant administrative data into a dynamic roadmap for educational improvement.
 
 ---
 
-## 12. Diagnostic Analysis 🩺
+## 13. Diagnostic Analysis 🩺
 
 While Descriptive Analysis tells us what the data looks like, Diagnostic Analysis explores the **why** behind the results. In this project, we investigated the underlying factors and correlations that influence district accountability scores.
 
-### 12.1 Correlation Analysis: The Impact of Poverty 📉
+### * Correlation Analysis: The Impact of Poverty 📉
 
 A primary goal was to diagnose the relationship between student demographics and performance scores.
 
 - **Correlation Coefficient** - There is a negative correlation of -0.43 between % Economically Disadvantaged and the Overall Score
 - **The "Why"** - This statistical diagnostic confirms that as the concentration of poverty increases, the accountability score tends to decrease. This suggests that the "Achievement Gap" is not just a perception but a systemic reality in the dataset, likely driven by differences in access to external resources, tutoring, and stable home environments
 
-### 12.2 The EB/EL Resilience Factor 💪
+### * The EB/EL Resilience Factor 💪
 
 Interestingly, the diagnostic revealed a very weak correlation (-0.11) between the percentage of EB/EL (Emergent Bilingual) students and the Overall Score.
 
 - **Insight** - Unlike poverty, which has a strong negative pull on scores, having a high percentage of English Learners does not automatically result in a low score
 - **The "Why"** - This suggests that many districts have developed effective ESL/Bilingual programs that help these students achieve growth, which is a major component of the "School Progress" domain
 
-### 12.3 Outlier Analysis: "The Resilient vs. The Struggling" 🚨
+### * Outlier Analysis: "The Resilient vs. The Struggling" 🚨
 
 By filtering the data for outliers, we identified districts that defy the expected trends.
 
-#### 12.3.1 Resilient Districts (High Poverty, High Performance)
+#### * Resilient Districts (High Poverty, High Performance)
 
 We identified several "Resilient" districts that maintain an 'A' Rating despite having over 75% economically disadvantaged students.
 
 - **Examples** - Heritage, Amigos Por Vida-Friends For Life, and Alief Montessori Community
 - **Diagnostic Conclusion** - These districts prove that socioeconomic status is not destiny. Their success suggests that factors not captured in the raw data—such as strong leadership, specialized curriculum, or high community engagement—are effectively neutralizing the impact of poverty
 
-#### 12.3.2 Underperforming Low-Poverty Districts
+#### * Underperforming Low-Poverty Districts
 
 Conversely, we identified districts with low poverty (<40%) that received 'C' or 'D' ratings.
 
 - **Examples** - Salado, Krum, and Navarro
 - **Diagnostic Conclusion** - These districts indicate that lack of poverty does not guarantee success. The "Why" here may involve stagnating growth metrics or failure to meet "Closing the Gaps" targets for specific subgroups, highlighting that even well-resourced districts must focus on continuous improvement
 
-### 12.4 Regional Trends 🌏
+### * Regional Trends 🌏
 
 The diagnostic analysis showed that larger metropolitan regions like San Antonio and Austin (Average Scores: ~72-74) struggle more than smaller regions like Wichita Falls (Average Score: 83.2).
 
 - **The "Why"** - Larger districts often face more complex administrative challenges, higher student mobility, and deeper pockets of urban poverty that require more localized, intensive interventions than smaller, more cohesive rural or suburban districts
 
-### 12.5 Diagnostic Summary 📋
+### ** Diagnostic Summary 📋
 
 | Variable | Influence on Score | Diagnostic Takeaway |
 |---|---|---|
@@ -358,11 +358,11 @@ The diagnostic analysis showed that larger metropolitan regions like San Antonio
 
 ---
 
-## 13. Predictive Insight 🔮
+## 14. Predictive Insight 🔮
 
 Predictive Insight moves beyond explaining the past to forecasting future outcomes. By applying statistical modeling to the 2022-2023 accountability data, we can identify which variables serve as the strongest leading indicators of a district's future success.
 
-### 13.1 Regression Modeling: The Forecasting Engine 📈
+### * Regression Modeling: The Forecasting Engine 📈
 
 Using Linear Regression, we analyzed the predictive power of demographic factors on a district's Overall Score. The model revealed that while socioeconomic status is a major factor, it is not the only driver of performance.
 
@@ -372,14 +372,14 @@ Using Linear Regression, we analyzed the predictive power of demographic factors
 - **The Growth Factor (EB/EL)** - Interestingly, the % EB/EL Students attribute has a slightly positive coefficient (+3.46) when controlled alongside poverty
   - **Predictive Insight** - This suggests that districts with robust language support programs can actually leverage student growth metrics to maintain or improve their overall ratings, regardless of language barriers
 
-### 13.2 Probability of Success (Binary Classification) 🧠
+### * Probability of Success (Binary Classification) 🧠
 
 Based on historical data patterns, we can calculate the Probability of Achievement.
 
 - **High Poverty / High Performance (The 36% Rule)** - The model shows that a "High Poverty" district currently has a 36.2% probability of achieving an 'A' or 'B' rating
 - **Targeted Identification** - We can use this logic to flag "At-Risk" districts—those whose current scores are significantly lower than what the model predicts for their demographic profile. These districts are statistically underperforming and should be the primary focus for diagnostic audits
 
-### 13.3 Summary of Predictive Conclusions 📝
+### * Summary of Predictive Conclusions 📝
 
 | Predictive Metric | Finding | Strategic Action |
 |---|---|---|
@@ -389,40 +389,40 @@ Based on historical data patterns, we can calculate the Probability of Achieveme
 
 ---
 
-## 14. Prescriptive Insight 🧭
+## 15. Prescriptive Insight 🧭
 
 Prescriptive Insight represents the final and most advanced stage of the data analytics lifecycle. While predictive analytics tells us what is likely to happen, prescriptive analytics recommends specific actions to optimize those outcomes.
 
 Based on the diagnostic and predictive patterns identified in the school accountability data, the following strategic prescriptions are recommended to improve statewide educational performance.
 
-### 14.1 Resource Allocation: The 60% Poverty Threshold 💰
+### * Resource Allocation: The 60% Poverty Threshold 💰
 
 The data shows a significant performance drop-off once a district exceeds 60% economic disadvantage.
 
 - **Prescription** - Implement a "Socioeconomic Buffer Fund." Districts that cross the 60% poverty mark should receive automatic increases in per-pupil funding specifically earmarked for wraparound services (nutrition, health, and counseling) to mitigate the external factors that the diagnostic analysis proved are dragging down scores
 
-### 14.2 Instructional Strategy: Replicating the "Resilient 36%" 🧑‍🏫
+### * Instructional Strategy: Replicating the "Resilient 36%" 🧑‍🏫
 
 We identified that 36.2% of high-poverty districts are "High Performing" (A/B rated).
 
 - **Prescription** - Establish a "Resilience Mentorship Program." Low-performing high-poverty districts should be paired with one of the identified resilient districts (e.g., Heritage or Alief Montessori) for a formal knowledge-exchange program
 - **Action** - Conduct audits of the resilient districts' master schedules and teacher coaching models to create a "Success Template" for struggling peers
 
-### 14.3 Language Support: Prioritizing Growth Metrics 🌐
+### * Language Support: Prioritizing Growth Metrics 🌐
 
 The predictive model showed that EB/EL populations do not necessarily lower overall scores because they drive high "Academic Growth" points.
 
 - **Prescription** - Shift the focus for high-EB/EL districts from "Student Achievement" (raw STAAR scores) to "School Progress" (Growth)
 - **Action** - State-level evaluations for these districts should place a 10% higher weight on the Growth domain. This incentivizes schools to focus on individual student progress, which the diagnostic analysis proves is their greatest area of strength
 
-### 14.4 Early Warning System: Predictive Performance Flags 🚨
+### * Early Warning System: Predictive Performance Flags 🚨
 
 The project's predictive model can identify districts whose current performance is significantly lower than their "predicted score" based on demographics.
 
 - **Prescription** - Launch a "Predictive Intervention Dashboard" for TEA administrators
 - **Action** - Any district underperforming its predicted model score by more than 10 points should be flagged for a Level 1 Diagnostic Review before the next academic cycle. This allows for proactive intervention rather than waiting for a failing grade to be published
 
-### 14.5 Summary of Prescriptive Actions 📝
+### ** Summary of Prescriptive Actions 📝
 
 | Challenge Identified | Prescriptive Action | Target Outcome |
 |---|---|---|
@@ -431,21 +431,21 @@ The project's predictive model can identify districts whose current performance 
 | Language Barriers | Increase weighting on Growth metrics | Reward progress over raw testing data |
 | Underperformance | Proactive flags based on predictive model | Prevent district failure before it occurs |
 
-### 14.6 Conclusion: The Path Forward 🚀
+### *** Conclusion: The Path Forward 🚀
 
 The prescriptive stage transforms this project from a report into a strategic roadmap. By shifting from reactive grading to proactive resource allocation and mentorship, the state can begin to decouple a student's socioeconomic background from their academic destiny. The integration of Excel for data cleaning and Power BI for predictive modeling ensures that these prescriptions are based on empirical evidence rather than intuition.
 
 ---
 
-## 15. Final Conclusion ✅
+## 16.Final Conclusion ✅
 
 The Conclusion of this project synthesizes the technical workflows and analytical findings to provide a final assessment of the Texas school accountability landscape for the 2022-2023 academic year.
 
-### 15.1 Project Summary 📌
+### 1. Project Summary 📌
 
 This project successfully transformed a high-volume, complex administrative dataset into a structured analytical tool. By utilizing Microsoft Excel for rigorous data cleaning and Power BI for advanced data modeling and DAX integration, we transitioned from raw data points to strategic educational insights.
 
-### 15.2 Key Takeaways ✨
+### 2. Key Takeaways ✨
 
 1. **Technical Achievement** - The insertion of calculated "IF" logic columns (such as Poverty Status and Performance Level) allowed for a more nuanced analysis that standard administrative reports often overlook. This proved that data transformation is essential for identifying the specific needs of different student populations.
 
@@ -453,7 +453,7 @@ This project successfully transformed a high-volume, complex administrative data
 
 3. **Actionable Intelligence** - Through predictive and prescriptive insights, the project moved beyond historical reporting to offer a roadmap for future interventions, specifically recommending resource allocation shifts at the 60% poverty threshold and mentorship programs between resilient and struggling districts.
 
-### 15.3 Final Assessment ✅
+## 17. Final Assessment Conculsion ✅
 
 The 2022-2023 accountability data reveals a resilient but challenged educational system. While the "Achievement Gap" persists, the data demonstrates that significant academic growth is occurring in districts regardless of their demographic makeup.
 
