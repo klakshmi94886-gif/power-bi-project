@@ -200,6 +200,7 @@ Useful for comparing a specific district's performance against the state average
 ---
 
 ## 10. Dashboard Overview 📊
+<img width="546" height="344" alt="Screenshot_20260503_175239_Chrome" src="https://github.com/user-attachments/assets/7e9b35fc-1031-4a82-8a7a-643f61504de7" />
 
 The dashboard is designed with a hierarchical flow: starting with high-level Key Performance Indicators (KPIs) at the top, followed by Geographic and Categorical distributions, and concluding with Correlation Analysis to explore the "why" behind the numbers.
 
